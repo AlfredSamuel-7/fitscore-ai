@@ -1,0 +1,46 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Alfed",
+      "email": "alfredsamd7@gmail.com",
+      "password": "aaaaaaa",
+      "_lastToken": "mock-3055bd171c5754e5-1764068238402"
+    },
+    {
+      "id": 2,
+      "name": "Alfre",
+      "email": "alredsamd7@gmail.com",
+      "password": "aaaaaaaa",
+      "_lastToken": "mock-3685d45ce6c4d3c9-1764070445691"
+    },
+    {
+      "id": 3,
+      "name": "vfua",
+      "email": "ajhvah@gmail.com",
+      "password": "schjc jch j",
+      "_lastToken": "mock-c3a39a79e4eeb1b7-1764072432356"
+    },
+    {
+      "id": 4,
+      "name": "gh",
+      "email": "you@example.com",
+      "password": "hvjhvjhvjh j",
+      "_lastToken": "mock-b8204293bdc15d71-1764080540223"
+    }
+  ],
+  "profile": {
+    "skills": [
+      "React",
+      "Python",
+      "SQL"
+    ],
+    "progress": 72,
+    "goals": "Improve your skills to reach 90%",
+    "matchedRoles": [
+      "Frontend",
+      "ML",
+      "Data"
+    ]
+  }
+}

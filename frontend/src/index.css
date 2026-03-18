@@ -1,0 +1,212 @@
+/* src/index.css
+   Complete global styles, light & dark variables, hero helpers, blobs, glass, transitions.
+   Designed for an ultra-modern hero with full dark-mode support.
+*/
+
+/* Tailwind directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========== Design tokens ========== */
+:root {
+  --page-bg-light: #f7fafc;        /* very light */
+  --page-bg-dark:  #06070a;        /* deep midnight */
+  --surface-light: #ffffff;
+  --surface-2:     #f1f5f9;
+  --text-1:        #0f172a;        /* slate-900 */
+  --muted:         #64748b;        /* slate-500 */
+  --accent-1:      #4f46e5;        /* indigo 600 */
+  --accent-2:      #06b6d4;        /* teal-400 */
+  --glass-alpha:   0.72;
+  --glass-dark-a:  0.54;
+  --max-w-page:    1200px;
+}
+
+/* Smooth theme transitions */
+html, body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color .35s ease, color .25s ease;
+}
+
+/* Light mode global */
+body {
+  background: var(--page-bg-light);
+  color: var(--text-1);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  min-height: 100%;
+  line-height: 1.45;
+}
+
+/* Dark mode global */
+.dark body {
+  background: linear-gradient(180deg, rgba(4,6,10,1) 0%, rgba(8,10,14,1) 100%);
+  color: #e6eef8;
+}
+
+/* Container helper */
+.container-max { max-width: var(--max-w-page); margin-left:auto; margin-right:auto; padding-left:1rem; padding-right:1rem; }
+
+/* ========== Hero background & blobs ========== */
+/* hero-bg used on the hero section only */
+.hero-bg {
+  position: relative;
+  overflow: visible;
+  background:
+    radial-gradient(800px 420px at 10% 20%, rgba(79,70,229,0.12), transparent 8%),
+    radial-gradient(600px 360px at 82% 52%, rgba(6,182,212,0.10), transparent 8%),
+    linear-gradient(180deg, rgba(247,250,252,1), rgba(245,247,250,1));
+}
+
+/* dark variant */
+.dark .hero-bg {
+  background:
+    radial-gradient(700px 380px at 8% 18%, rgba(99,102,241,0.08), transparent 10%),
+    radial-gradient(520px 320px at 84% 55%, rgba(6,182,212,0.06), transparent 12%),
+    linear-gradient(180deg, rgba(6,8,12,1), rgba(8,10,14,1));
+}
+
+/* Floating blobs */
+.blob {
+  position: absolute;
+  filter: blur(28px);
+  mix-blend-mode: normal;
+  opacity: 0.95;
+  pointer-events: none;
+  will-change: transform, opacity;
+  transition: transform 0.6s cubic-bezier(.2,.9,.2,1), opacity 0.6s;
+}
+
+@keyframes float-slow {
+  0% { transform: translateY(0) translateX(0) rotate(0deg); }
+  50% { transform: translateY(-18px) translateX(8px) rotate(4deg); }
+  100% { transform: translateY(0) translateX(0) rotate(0deg); }
+}
+@keyframes float-very-slow {
+  0% { transform: translateY(0) translateX(0) rotate(0deg); }
+  50% { transform: translateY(-28px) translateX(-12px) rotate(-6deg); }
+  100% { transform: translateY(0) translateX(0) rotate(0deg); }
+}
+
+/* For smaller screens reduce blur/size */
+@media (max-width: 640px) {
+  .blob { filter: blur(20px); opacity: .9; }
+}
+
+/* ========== Glass styles ========== */
+.glass {
+  background: rgba(255,255,255,var(--glass-alpha));
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.36);
+  color: var(--text-1);
+}
+
+/* Glass dark */
+.dark .glass {
+  background: rgba(10,12,16,var(--glass-dark-a));
+  border: 1px solid rgba(255,255,255,0.04);
+  color: #e6eef8;
+}
+
+/* chip base */
+.chip {
+  display:inline-flex;
+  align-items:center;
+  padding: .25rem .6rem;
+  border-radius: 9999px;
+  font-size: .75rem;
+  font-weight:500;
+  background: rgba(255,255,255,0.6);
+  color: var(--text-1);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+/* dark chips inside hero/glass */
+.dark .hero-container .chip,
+.dark .glass .chip {
+  background: rgba(255,255,255,0.04);
+  color: #cbd5e1;
+  border-color: rgba(255,255,255,0.04);
+}
+
+/* ========== Hero entrance animation ========== */
+.hero-appear { animation: appearUp 700ms cubic-bezier(.2,.9,.2,1) both; }
+@keyframes appearUp {
+  from { opacity: 0; transform: translateY(18px) scale(.997); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ========== CTA buttons ========== */
+.btn-primary {
+  @apply inline-flex items-center gap-3 px-5 py-3 rounded-2xl font-semibold text-white shadow-lg;
+  background: linear-gradient(90deg,var(--accent-1),var(--accent-2));
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(79,70,229,0.16); }
+.btn-ghost {
+  @apply inline-flex items-center gap-3 px-4 py-3 rounded-2xl border bg-white/80 text-slate-900;
+  transition: all .15s ease;
+}
+.dark .btn-ghost { @apply bg-slate-800/50 text-slate-100 border-slate-700; }
+
+/* ========== Hero curve divider ========== */
+.hero-curve {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -18px;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-curve svg { display:block; width:100%; height:88px; }
+
+.hero-curve .curve-light { fill: rgba(255,255,255,0.95); }
+.dark .hero-curve .curve-dark { fill: rgba(6,8,12,0.98); }
+
+/* ========== Misc helpers ========== */
+.drop-shadow-strong { filter: drop-shadow(0 20px 40px rgba(12,16,24,0.12)); }
+
+@media (min-width: 1280px) {
+  .hero-container { padding-left: 6rem; padding-right: 6rem; }
+}
+
+.mockup-deco {
+  will-change: transform, opacity;
+  transition: transform .35s cubic-bezier(.2,.9,.2,1), opacity .35s;
+  transform-origin: center;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.glass { z-index: 6; position: relative; }
+
+@media (max-width: 1024px) {
+  .mockup-deco {
+    width: 240px !important;
+    height: 140px !important;
+    top: 160px !important;
+    right: -8px !important;
+    transform: rotate(0deg) !important;
+    opacity: 0.95;
+  }
+}
+
+@media (max-width: 640px) {
+  .mockup-deco { display: none !important; }
+}
+
+/* ========================================================= */
+/* ===== NEW: Subtle Background Motion (Startup Feel) ===== */
+/* ========================================================= */
+
+@keyframes slowFloat {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
+}
+
+.bg-float {
+  animation: slowFloat 8s ease-in-out infinite;
+}
